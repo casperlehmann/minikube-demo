@@ -1,0 +1,13 @@
+version: '3.0'
+services:
+  hello:
+    image: hello:dev
+    environment:
+      PYTHONUNBUFFERED: 1
+      LOGLEVEL: INFO
+      FLASK_ENV: development
+    build:
+      context: ./hello-py
+      dockerfile: Dockerfile
+    ports:
+      - "5000"

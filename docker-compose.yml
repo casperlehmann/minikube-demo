@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  hello:
+    environment:
+      PYTHONUNBUFFERED: 1
+      LOGLEVEL: INFO
+      FLASK_ENV: development
+    image: hello:dev
+    ports:
+      - "5000"
