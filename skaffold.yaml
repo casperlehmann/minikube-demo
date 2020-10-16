@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+metadata:
+  name: minikube-demo
+build:
+  artifacts:
+  - image: hello
+    context: hello-py
+deploy:
+  kubectl:
+    manifests:
+    - hello-deployment.yaml
+    - hello-service.yaml

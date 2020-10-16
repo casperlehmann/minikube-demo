@@ -50,6 +50,40 @@ kubectl apply -f hello-deployment.yaml,hello-service.yaml
 minikube service hello
 ```
 
+## Skaffold
+
+The smart way to do this is using the continuous development tool Skaffold.
+
+`brew install skaffold`
+
+```
+eval $(minikube docker-env)
+> skaffold init
+[...]
+Configuration skaffold.yaml was written
+You can now run [skaffold build] to build the artifacts
+or [skaffold run] to build and deploy
+or [skaffold dev] to enter development mode, with auto-redeploy
+> skaffold dev
+Watching for changes...
+```
+
+This will make Kubernetes dynamically rebuild every time changes in the code demand it.
+
+Minikube needs to run in the background, so we need a second terminal for that.
+
+```
+eval $(minikube docker-env)
+minikube service hello
+```
+
+The only thing to remember is we are still responsible for supplying up-to-date yaml files, by running kompose when needed to regenerate configuration. So we might need to open a third terminal as well.
+
+```
+eval $(minikube docker-env)
+kompose convert
+```
+
 ## What you should not do
 
 So to be clear, `kubectl run` is not what you are looking for, and this is not going to work:
@@ -69,3 +103,5 @@ $ kubectl run hello-py --image=hello-py:v1 --port=8080
 - https://cloud.google.com/kubernetes-engine/docs/concepts/deployment#:~:text=and%20stable%20hostnames.-,Creating%20Deployments,are%20evicted%20from%20their%20nodes.
 
 - [Walkthrough: Minikube with local build](https://kubernetes.io/blog/2018/05/01/developing-on-kubernetes/)
+
+- https://medium.com/@mukherjee.aniket/continuous-development-using-skaffold-with-local-kubernetes-cluster-with-hot-reload-61009e185258

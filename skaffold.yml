@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1alpha4
+kind: Config
+build:
+  artifacts:
+  - image: hello:dev
+    context: .
+    sync:
+      '*': .
+deploy:
+  kubectl:
+    manifests:
+    - "hello-deployment.yaml"
