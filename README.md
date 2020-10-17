@@ -6,7 +6,15 @@ Recent deprecations in the kubectl api have resulted in some difficulties when s
 
 The [canonical answer](https://stackoverflow.com/questions/52890718/kubectl-run-is-deprecated-looking-for-alternative) on the topic describes the reason for these changes, but for the majority of newcomers to Kubernetes, that information is not what we need. We'd just like to know what to do instead.
 
-This actually works:
+## What you should not do
+
+So to be clear, `kubectl run` is not what you are looking for, and this is not going to work:
+
+``` bash
+$ kubectl run hello-py --image=hello-py:v1 --port=8080
+```
+
+## Managing minikube manually
 
 ``` bash
 eval $(minikube docker-env)
@@ -82,14 +90,6 @@ The only thing to remember is we are still responsible for supplying up-to-date 
 ```
 eval $(minikube docker-env)
 kompose convert
-```
-
-## What you should not do
-
-So to be clear, `kubectl run` is not what you are looking for, and this is not going to work:
-
-``` bash
-$ kubectl run hello-py --image=hello-py:v1 --port=8080
 ```
 
 ## Sources
